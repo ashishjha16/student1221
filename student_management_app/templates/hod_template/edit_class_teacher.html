@@ -1,0 +1,157 @@
+{% extends 'hod_template/base_template.html' %}
+
+{% block page_title %}
+Edit Class Teacher
+{% endblock page_title %}
+
+{% block main_content %}
+
+<section class="content">
+
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <div class="card card-primary">
+
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Edit Class Teacher
+                        </h3>
+                    </div>
+
+                    <form method="POST"
+                          action="/edit_class_teacher_save/">
+
+                        {% csrf_token %}
+
+                        <div class="card-body">
+
+                            <input type="hidden"
+                                   name="class_teacher_id"
+                                   value="{{ class_teacher.id }}">
+
+                            <div class="form-group">
+
+                                <label>Staff</label>
+
+                                <select class="form-control"
+                                        name="staff">
+
+                                    {% for staff in staffs %}
+
+                                    <option value="{{ staff.id }}"
+                                    {% if staff.id == class_teacher.staff.id %}
+                                    selected
+                                    {% endif %}
+                                    >
+
+                                        {{ staff.admin.first_name }}
+                                        {{ staff.admin.last_name }}
+
+                                    </option>
+
+                                    {% endfor %}
+
+                                </select>
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label>Year</label>
+
+                                <select class="form-control"
+                                        name="year">
+
+                                    <option value="FY"
+                                    {% if class_teacher.year == "FY" %}
+                                    selected
+                                    {% endif %}
+                                    >
+                                    First Year
+                                    </option>
+
+                                    <option value="SY"
+                                    {% if class_teacher.year == "SY" %}
+                                    selected
+                                    {% endif %}
+                                    >
+                                    Second Year
+                                    </option>
+
+                                    <option value="TY"
+                                    {% if class_teacher.year == "TY" %}
+                                    selected
+                                    {% endif %}
+                                    >
+                                    Third Year
+                                    </option>
+
+                                    <option value="Final"
+                                    {% if class_teacher.year == "Final" %}
+                                    selected
+                                    {% endif %}
+                                    >
+                                    Final Year
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label>Division</label>
+
+                                <select class="form-control"
+                                        name="division">
+
+                                    <option value="A"
+                                    {% if class_teacher.division == "A" %}
+                                    selected
+                                    {% endif %}
+                                    >
+                                    A
+                                    </option>
+
+                                    <option value="B"
+                                    {% if class_teacher.division == "B" %}
+                                    selected
+                                    {% endif %}
+                                    >
+                                    B
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="card-footer">
+
+                            <button type="submit"
+                                    class="btn btn-primary">
+
+                                Update Class Teacher
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock main_content %}
